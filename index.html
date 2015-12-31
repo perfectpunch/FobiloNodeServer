@@ -1,0 +1,120 @@
+<html>
+<head>
+	<title>Chat with socket.io and node.js</title>
+	<style>
+		#chat{
+			height:500px;
+		}
+		#contentWrap{
+			display: none;
+		}
+		#chatWrap{
+			float: left;
+			border: 1px #000 solid;
+		}
+		.error{
+			color: red;
+		}
+		.whisper{
+			color: gray;
+			font-style: italic;
+		}
+	</style>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+</head>
+<body>
+	<div id="nickWrap">
+		<p>Enter a username:</p>
+		<p id="nickError"></p>
+		<form id="setNick">
+			<input size="35" id="nickname" value="metin"></input>
+			<input size="35" id="password" value="123456"></input>
+			<input type="submit"></input>
+		</form>
+	</div>
+
+	<div id="contentWrap">
+		<div id="chatWrap">
+			<div id="chat"></div>
+			<form id="send-message">
+				<input size="35" id="message"></input>
+				<input type="submit"></input>
+			</form>
+			<form id="asd">
+				<input size="35" id="message2"></input>
+				<input size="35" id="message3"></input>
+				<input type="submit"></input>
+			</form>
+		</div>
+		<div id="users"></div>
+	</div>
+	
+	
+	<script>
+		jQuery(function($){
+			
+			var socket = io.connect();
+			var $nickForm = $('#setNick');
+			var $nickError = $('#nickError');
+			var $nickBox = $('#nickname');
+			var $pwBox = $('#password');
+			var $users = $('#users');
+			var $messageForm = $('#send-message');
+			var $messageForm2 = $('#asd');
+			var $messageBox = $('#message');
+			var $messageBox2 = $('#message2');
+			var $messageBox3 = $('#message3');
+			var $chat = $('#chat');
+			
+			$nickForm.submit(function(e){
+				e.preventDefault();
+				
+				socket.emit('new user', $nickBox.val(), $pwBox.val(), function(data){
+					if(data.status=="success"){
+						$('#nickWrap').hide();
+						$('#contentWrap').show();
+					} else{
+						$nickError.html(data);
+					}
+				});
+				$nickBox.val('');
+				$pwBox.val('');
+			});
+			
+			socket.on('usernames', function(data){
+				var html = '';
+				for(i=0; i < data.length; i++){
+					html += data[i] + '<br/>'
+				}
+				$users.html(html);
+			});
+			
+			$messageForm.submit(function(e){
+				e.preventDefault();
+				socket.emit('change-mail', 'metin.aydin06@hotmail.com', 'asd', function(data){
+					$chat.append('<span class="error">' + data + "</span><br/>");
+				});
+				$messageBox.val('');
+			});
+			
+			$messageForm2.submit(function(e){
+				e.preventDefault();
+				socket.emit("set-account-privacy", function(data){
+					$chat.append('<span class="error">' + data.privacy + "</span><br/>");
+				});
+				$messageBox2.val('');
+				$messageBox3.val('');
+			});
+			
+			socket.on('another-login', function(data){
+				alert(data.alert);
+			});
+			
+			socket.on('like', function(data){
+				$chat.append('<span class="whisper"><b>' + data.user_id + "," + data.username + ': </b>' + data.photo_name + "</span><br/>");
+			});
+		});
+	</script>
+</body>
+</html>

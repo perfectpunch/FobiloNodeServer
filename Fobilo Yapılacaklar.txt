@@ -1,0 +1,31 @@
+wifi kapanýnca socket baðlantýsý gidiyor, wifi tekrar açýlýnca yeniden baðlanmayý yap
+
+kullanýcý aramayý geliþtir (server çalýþýnca tüm kullanýcýlarý veritabanýndan çekip bir diziye atsýn, get-search-results dizide kullanýcý adýný aratýp sonucu döndürsün. birisi kayýt olduðunda, hesabýný sildiðinde veya kullanýcý adýný deðiþtirdiðinde bu dizi de deðiþsin)
+
+kayýt ekranýndaki kullanýcý sözleþmesini yap
+
+photoviewer ýn ilk açýlýþta fotoðrafý göstermemesi sorununu düzelt
+
+yorumlara ve paylaþým açýklamalarýna emoji ve kiþi etiketlemeyi ekle
+
+çizimdeki more tuþunu yap (photo.class)
+
+bildirimler recyclerviewinin yüksekliðini düzelt sýðmýyor
+
+çýkýþ yapýnca bildirim çubuðundaki bildirimler gitsin
+
+giriþ yapýnca bildirimleri çeksin
+
+bildirimler activity sine girince bildirim çubuðundaki bildirimler silinsin
+
+bildirimler butonunda bildirim sayýsý yazsýn
+
+recyclerviewin scrollbarlarýný ayarla
+
+paylaþýlanlarý takip edilenlere göre nodejs ile çek(news)
+
+nodejs fonksiyona fazladan deðer gönderince server kapanmasý sorununu çöz(fonksiyona aþýrý yükleme yap (string attributes...) çözmeyi dene)
+
+yorum silmeyi ve düzenlemeyi yap
+
+kayýt olurken veya mail deðiþtirirken 5 harfli kod göndersin, mail deðiþtirme ekranýnda kodu tekrar gönder-zaten kodum var butonlarý olsun
